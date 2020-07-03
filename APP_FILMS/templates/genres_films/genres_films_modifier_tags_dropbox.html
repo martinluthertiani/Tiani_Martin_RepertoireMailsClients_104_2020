@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block title %} Afficher FILMS GENRES {% endblock %}
+{% block head %}
+    <!--
+        OM 2020.05.04
+        On utilise le composant "tags-selector-tagselect" juste dans cette page,
+         il n'est pas nécessaire de la charger pour chaque page
+        c'est pourquoi il ne se trouve pas dans "base.html" mais ici
+        entre les balises JINJA "block head" "endblock"
+        -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='tags-selector-tagselect/jquery.tagselect.css') }}">
+    <script src="{{ url_for('static', filename='tags-selector-tagselect/jquery.tagselect.js') }}"></script>
+{% endblock %}
+{% block body %}
+
+
+<!--
+    OM 2020.05.04
+    Il faut éviter de placer des instructions css n'importe où et surtout en plein milieu de nulle part,
+    pour dépanner l'application ce n'est vraiment pas top...
+    Mais Flask ne reconnaît pas les instructions ci-dessous lorsqu'elles sont dans un fichier externe
+-->
+
+    <style>
+        ol, ul, li {
+            list-style: none;
+        }
+    </style>
+
+
+<div class="container">
+		<div class="col-md-12">
+
+            <table>
+                <a>Liaison originelle</a>
+
+                {% for item in datasourceselected_combo %}
+                    <tr>
+                        <td><b>{{ item.Nom_Pers }}</b></td>
+                        <td><b>{{ item.Pernom_Pers }}</b></td>
+                        <td><b>{{ item.Nom_Mail }}</b></td>
+                    </tr>
+                {% endfor %}
+            </table>
+		</div>
+	</div>
+
+<div class="container">
+    <div class="row mx-md-n5">
+      <div class="col px-md-5">
+          <div class="p-3">
+          <a>Les listes suivantes sont composées de tous les éléments, afin de pouvoir la modifier selon votre choix</a>
+          <br>
+            <form id="form_tags_select_confirm" action="{{ url_for('gf_update_genre_film_selected') }}" method="POST">
+
+                <div class="qtagselect isw360">
+                    <input type="hidden" name="id_pers_mail" value="{{ datasourceselected_combo[0].id_Pers_Mail }}"/>
+                    <a>Nouvel-le personne</a>
+                    <select  name="newPersonne" >
+                        {% for row in datasourceother_addres %}
+                            <option value="{{ row.id_Pers }}" name="name_tags_non_attribues_html" class="isblue" >{{ row.Nom_Pers }}{{ row.Pernom_Pers }}{{ row.RaisonSociale_Pers }}</option>
+                        {% endfor %}
+                    </select>
+                <br>
+                    <a>Nouveau mail lié  :</a>
+                    <select  name="newEmail"  >
+                        {% for row in datasourceother_films %}
+                            <option value="{{ row.id_Mails }}" name="name_tags_attribues_html" class="ispurple" selected>{{ row.Nom_Mail }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+            </form>
+          </div>
+      </div>
+      <div class="col px-md-5">
+          <div class="p-3">
+            <input type="submit" form="form_tags_select_confirm" class="btn btn-warning" value="Modifier">
+          </div>
+      </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $('.qtagselect__select').tagselect({
+    // Paramètres du composant : https://www.jqueryscript.net/form/tags-selector-tagselect.html
+    // maximum number of tags allowed to select
+      'maxTag': 100,
+    // error message,
+      'tagMessage': '100 tags au max !'
+    });
+</script>
+{% endblock %}

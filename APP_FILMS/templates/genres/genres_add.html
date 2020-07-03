@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %} Ajouter un GENRE{% endblock %}
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<p>
+				Clavioter un nouveau GENRE
+			</p>
+			<form method="POST">
+				<div class="form-group">
+					<label for="Nom_genre">
+						Nom
+					</label>
+					<input type ="text" class="form-control" name="InputNom" />
+                    <label for="Nom_genre">
+						Prénom
+					</label>
+					<input type ="text" class="form-control" name="InputPrenom" />
+                    <label for="Nom_genre">
+						Raison sociale
+					</label>
+					<input type ="text" class="form-control" name="InputRS" />
+                    <label for="Nom_genre">
+						Nom Responsable
+					</label>
+					<input type ="text" class="form-control" name="InputNR" />
+                    <label for="Nom_genre">
+						Prenom Responsable
+					</label>
+					<input type ="text" class="form-control" name="InputPR" />
+                    <label for="Nom_genre">
+				</div>
+				<button type="submit" class="btn btn-primary">
+					Enregistrer le genre
+				</button>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

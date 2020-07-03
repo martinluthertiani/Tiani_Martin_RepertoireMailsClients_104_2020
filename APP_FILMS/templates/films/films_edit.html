@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Edit GENRE{% endblock %}
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<p>
+				Modifier ce genre.
+			</p>
+			<form method="POST" action="{{ url_for('films_update') }}">
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr>
+
+                            <th>
+                                Nom
+                            </th>
+
+                        </tr>
+                    </thead>
+                    {% for row in data %}
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="hidden" name="id_email_edit_html" value="{{ row.id_Mails }}"/>
+                                </td>
+                                <td>
+                                    <input type = "text" style="width: 100%" name = "UpdatedEmail" value="{{ row.Nom_Mail }}"/>
+                                </td>
+
+                                <td>
+                                    <button class="btn btn-warning" type="submit">Update</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    {% endfor %}
+                </table>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

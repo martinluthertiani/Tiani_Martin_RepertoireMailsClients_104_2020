@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}DELETE GENRE{% endblock %}
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<p>
+				Effacer ce genre.
+			</p>
+			<form method="POST" action="{{ url_for('genres_delete') }}">
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr>
+                            <th>
+                                id
+                            </th>
+                            <th>
+                                Nom
+                            </th>
+                            <th>
+                                Prenom
+                            </th>
+                            <th>
+                                Raison Social
+                            </th>
+                            <th>
+                                Nom Responsable
+                            </th>
+                            <th>
+                                Prenom Responsable
+                            </th>
+                        </tr>
+                    </thead>
+                    {% for row in data %}
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="hidden" name="id_genre_delete_html" value="{{ row.id_Pers }}"/>
+                                </td>
+                                <td>
+                                    <a>{{ row.Nom_Pers }}</a>
+                                </td>
+                                <td>
+                                    {{ row.Prenom_Pers }}
+                                </td>
+                                <td>
+                                    {{ row.RaisonSociale_Pers }}
+                                </td>
+                                <td>
+                                    {{ row.NomRespo_Pers }}
+                                </td>
+                                <td>
+                                    {{ row.PrenomRespo_Pers }}
+                                </td>
+
+                                <td>
+                                    <button class="btn btn-danger" type="submit">EFFACER</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    {% endfor %}
+                </table>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

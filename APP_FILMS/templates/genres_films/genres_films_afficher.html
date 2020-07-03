@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %} Afficher FILMS {% endblock %}
+{% block body %}
+<div class="container">
+	<div class="col-md-12">
+		<table class="table table-responsive-sm">
+            {% if data %}
+				<thead>
+					<tr>
+						<th class="" >
+						 Nom
+						</th>
+						<th class="" >
+						  Prénom
+						</th>
+						<th class="" >
+						  Email
+						</th>
+						<th class="" >
+						  Action
+						</th>
+					</tr>
+				</thead>
+			{% endif %}
+
+			<tbody>
+            {% for row in data %}
+				<tr>
+					  <th class="align-middle">
+						  {{ row.Nom_Pers }}
+					  </th>
+					  <th class="align-middle">
+						    {{ row.Prenom_Pers }}
+					  </th>
+                      <th class="align-middle">
+						{{ row.Nom_Mail  }}
+					  </th>
+
+
+						<!--<th class="align-middle">
+							<a class="btn btn-primary" href="{{ url_for('gf_edit_genre_film_selected', id_personne=row.id_Pers, id_email=row.id_Mails) }}" role="button">Ajouter</a>
+						</th>-->
+                        <th class="align-middle">
+							<a class="btn btn-warning" href="{{ url_for('gf_edit_genre_film_selected', id_personne=row.id_Pers, id_email=row.id_Mails) }}" role="button">Modifier</a>
+						</th>
+                        <!--<th class="align-middle">
+							<a class="btn btn-danger" href="{{ url_for('gf_edit_genre_film_selected', id_personne=row.id_Pers, id_email=row.id_Mails) }}" role="button">Supprimer</a>
+						</th>-->
+
+				</tr>
+            {% endfor    %}
+			</tbody>
+
+
+		</table>
+	</div>
+</div>
+{% endblock %}

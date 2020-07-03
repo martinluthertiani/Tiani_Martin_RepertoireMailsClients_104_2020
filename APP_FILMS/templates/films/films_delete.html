@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}DELETE GENRE{% endblock %}
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<p>
+				Effacer ce genre.
+			</p>
+			<form method="POST" action="{{ url_for('films_delete') }}">
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr>
+                            <th>
+                                id
+                            </th>
+                            <th>
+                                Nom
+                            </th>
+                        </tr>
+                    </thead>
+                    {% for row in data %}
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="hidden" name="id_genre_delete_html" value="{{ row.id_Mails }}"/><a>{{ row.id_Mails }}</a>
+                                </td>
+                                <td>
+                                    <a>{{ row.Nom_Mail }}</a>
+                                </td>
+
+
+                                <td>
+                                    <button class="btn btn-danger" type="submit">EFFACER</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    {% endfor %}
+                </table>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}
